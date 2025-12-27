@@ -124,7 +124,7 @@ def model_fn(features, labels, mode, params):
 if __name__ == '__main__':
     params = {
         'dim': 300,
-        'lstm_size': 32,
+        'lstm_size': 256,
         'dropout': 0.5,
         'num_oov_buckets': 1,
         'epochs': 25,
