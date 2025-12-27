@@ -25,7 +25,7 @@ SECRET_KEY = '=v$7$f=y0@t%4po7)b_l+r7470@gb7^48c81_u%c!qj&xyu0)i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'text_emotion',
         'USER': 'root',
-        'PASSWORD': '123456',
+        'PASSWORD': '12345678',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }

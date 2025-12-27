@@ -1,4 +1,9 @@
 运行步骤
+
+1. 创建虚拟环境 python3 -m venv venv
+2. 看一下目录有没有新出现一个文件夹 venv 
+3. cd到venv的上层目录  source venv/bin/activate
+
 需要先安装Python的相关依赖：pymysql，Django，requests,tensorflow==1.12.0,jieba,bs4 使用pip install 安装
 
 第一步：创建数据库，数据库名：text_emotion
