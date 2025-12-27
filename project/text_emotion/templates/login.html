@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.default.css" id="theme-stylesheet">
+        <link rel="stylesheet" href="../static/layui/css/layui.css"/>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-6">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>欢迎登录</h1>
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-6 bg-white">
+                    <div class="form d-flex align-items-center">
+                        <div class="content">
+                            <form  class="layui-form"id="loginFrom">
+                                <div class="form-group">
+                                    <input id="username" type="text" name="username"  data-msg="请输入用户名"
+                                           placeholder="用户名"  class="input-material" lay-verify="required" >
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" type="password" name="password"  data-msg="请输入密码"
+                                           placeholder="密码" class="input-material" lay-verify="required" >
+                                </div>
+                                <button id="login" type="button" class="layui-btn"  lay-submit lay-filter="login">登录</button>
+                            </form>
+                            <br/>
+                            <small>没有账号?</small><a href="/register" class="signup">&nbsp;注册</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript files-->
+<script>
+    var layer;
+      layui.use(['element', 'table', 'layer', 'form'], function () {
+          layer = layui.layer;
+          let form = layui.form;
+
+    form.on('submit(login)', function(data) {
+
+
+                var userName=$("#username").val();
+                var passWord=$("#password").val();
+                $.ajax({
+                    type:"get",
+                    url:"/user/login_check",
+                    data:{"username":userName,"password":passWord},
+                    success:function(res){
+                        window.location.href = "/index"
+                    },
+                     error: function (xhr, type) {
+                        if (xhr.status == 401) {
+                            layer.msg('用户名或者密码不正确',{icon:5})
+                        }
+                    }
+                });
+
+        })
+    })
+</script>
+</body>
+</html>

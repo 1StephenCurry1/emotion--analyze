@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="../static/layui/css/layui.css"/>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/layui/layui.js"></script>
+
+{% endblock %}
+{% block content %}
+    <div class="contents">
+        <div class="grid_wrapper">
+
+            <div class="g_6 contents_header">
+                <h3 class="i_16_dashboard tab_label">文本分类</h3>
+                <div><span class="label">text classify</span></div>
+            </div>
+
+            <div class="g_12 separator"><span></span></div>
+            <div style="clear: both"></div>
+            <div style="margin-left: 20%">
+
+                    <input type="text" class="layui-input" placeholder="请输入文本" id="name" style="width: 60%">
+
+                <button type="button" class="layui-btn" id="classify" style="margin: 20px 20%">开始分类</button>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer
+            $(function () {
+                $("#classify").click(function () {
+                    var name = $("#name").val();
+                    var loading = layer.msg("正在为您分类文本，请稍后...", {icon: 16, shade: [0.3, "gray"], time: false});
+                    if ("" == name || undefined == name) {
+                        layer.msg("內容不能为空", {icon: 7});
+                        return
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: "/predict",
+                        dataType: 'json', //服务端返回json格式的数据
+                        data: {'text': name},
+
+                        success: function (data) { // 这里的data就是返回的json格式的数据
+                            layer.close(loading)
+                            var value = data.result
+                            $("#name").val('')
+                            layer.confirm(value, {icon: 5, title: '分类结果'}, function (index) {
+                                layer.close(index)
+                            })
+
+                        },
+                        error: function (xhr, type) {
+                            if (xhr.status == 505) {
+                                layer.msg('分类失败，请查看后台', {icon: 5})
+                            }
+                        }
+                    });
+
+                })
+            })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>基于机器学习的情感分类系统</title>
+	<link href="http://fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700" rel="stylesheet" />
+	<!-- The Main CSS File -->
+	<link rel="stylesheet" href="../static/css/style.css" />
+	<!-- jQuery -->
+	<script src="../static/js/jQuery/jquery-1.7.2.min.js"></script>
+	<!-- Flot -->
+	<script src="../static/js/Flot/jquery.flot.js"></script>
+	<script src="../static/js/Flot/jquery.flot.resize.js"></script>
+	<script src="../static/js/Flot/jquery.flot.pie.js"></script>
+	<!-- DataTables -->
+	<script src="../static/js/DataTables/jquery.dataTables.min.js"></script>
+	<!-- ColResizable -->
+	<script src="../static/js/ColResizable/colResizable-1.3.js"></script>
+	<!-- jQuryUI -->
+	<script src="../static/js/jQueryUI/jquery-ui-1.8.21.min.js"></script>
+	<!-- Uniform -->
+	<script src="../static/js/Uniform/jquery.uniform.js"></script>
+	<!-- Tipsy -->
+	<script src="../static/js/Tipsy/jquery.tipsy.js"></script>
+	<!-- Elastic -->
+	<script src="../static/js/Elastic/jquery.elastic.js"></script>
+	<!-- ColorPicker -->
+	<script src="../static/js/ColorPicker/colorpicker.js"></script>
+	<!-- SuperTextarea -->
+	<script src="../static/js/SuperTextarea/jquery.supertextarea.min.js"></script>
+	<!-- UISpinner -->
+	<script src="../static/js/UISpinner/ui.spinner.js"></script>
+	<!-- MaskedInput -->
+	<script src="../static/js/MaskedInput/jquery.maskedinput-1.3.js"></script>
+	<!-- ClEditor -->
+	<script src="../static/js/ClEditor/jquery.cleditor.js"></script>
+	<!-- Full Calendar -->
+	<script src="../static/js/FullCalendar/fullcalendar.js"></script>
+	<!-- Color Box -->
+	<script src="../static/js/ColorBox/jquery.colorbox.js"></script>
+	<!-- Kanrisha Script -->
+	<script src="../static/js/kanrisha.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+      {% block style %}
+{% endblock %}
+<body>
+
+	<div class="top_panel">
+		<div class="wrapper">
+			<div class="user">
+				<img src="../static/images/user_avatar.png" alt="user_avatar" class="user_avatar" />
+				<span class="label">欢迎你、admin</span>
+			</div>
+		</div>
+	</div>
+
+	<header class="main_header">
+		<div class="wrapper">
+			<div class="logo">
+				<a href="#" title="Kanrisha Home">
+					<img src="../static/images/kanrisha_logo.png" alt="kanrisha_logo" />
+				</a>
+			</div>
+			<nav class="top_buttons">
+				<ul>
+					<li class="big_button">
+						<div class="out_border">
+							<div class="button_wrapper">
+								<div class="in_border">
+									<a href="#" title="Analytics" class="the_button">
+										<span class="i_32_statistic"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="big_button">
+						<div class="out_border">
+							<div class="button_wrapper">
+								<div class="in_border">
+									<a href="#" title="Support" class="the_button">
+										<span class="i_32_support"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="big_button">
+						<div class="out_border">
+							<div class="button_wrapper">
+								<div class="in_border">
+									<a href="#" title="Delivery" class="the_button">
+										<span class="i_32_delivery"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="big_button">
+						<div class="out_border">
+							<div class="button_wrapper">
+								<div class="in_border">
+									<a href="#" title="Earning" class="the_button">
+										<span class="i_32_dollar"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div class="wrapper contents_wrapper">
+		
+		<aside class="sidebar">
+			<ul class="tab_nav">
+				<li class=" i_32_dashboard" id="index">
+					<a href="/index" title="General Info">
+						<span class="tab_label">首页</span>
+						<span class="tab_info">index</span>
+					</a>
+				</li>
+                <li class="i_32_charts" id="text_classify">
+					<a href="/text_classify" title="Visual Data">
+						<span class="tab_label">文本分类</span>
+						<span class="tab_info">text classify</span>
+					</a>
+				</li>
+				<li class="i_32_inbox" id="text_manage">
+					<a href="/text_manage" title="Your Messages">
+						<span class="tab_label">文本管理</span>
+						<span class="tab_info">text manage</span>
+					</a>
+				</li>
+
+				<li class="i_32_forms" id="password">
+					<a href="/user/password" title="Kit elements">
+						<span class="tab_label">修改密码</span>
+						<span class="tab_info">edit password</span>
+					</a>
+				</li>
+				<li class="i_32_tables" id="personal">
+					<a href="/personal" title="Some Rows">
+						<span class="tab_label">用户信息</span>
+						<span class="tab_info">user info</span>
+					</a>
+				</li>
+				<li class="i_32_ui" id="user">
+					<a href="/user/user" title="Some Fields">
+						<span class="tab_label">用户管理</span>
+						<span class="tab_info">user manage</span>
+					</a>
+				</li>
+			</ul>
+		</aside>
+        {% block content %}
+
+{% endblock %}
+	</div>
+</body>
+<script>
+
+       let currentElemt = window.location.pathname;
+    // nav菜单选择
+    if (currentElemt.indexOf('password') > -1) {
+        currentElemt = 'password'
+    } else if (currentElemt.indexOf('personal') > -1) {
+        currentElemt = 'personal'
+    } else if (currentElemt.indexOf('text_manage') > -1) {
+        currentElemt = 'text_manage'
+    }else if (currentElemt.indexOf('text_classify') > -1) {
+        currentElemt = 'text_classify'
+    }else if (currentElemt.indexOf('user') > -1) {
+        currentElemt = 'user'
+    }else{
+        currentElemt = 'index'
+    }
+    $('#' + currentElemt).addClass('active_tab');
+</script>
+      {% block script %}
+{% endblock %}
+</html>

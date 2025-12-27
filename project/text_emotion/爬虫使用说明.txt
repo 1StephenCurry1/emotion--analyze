@@ -1,0 +1,2 @@
+1、下载python库，python -m pip install urllib
+2、运行，python   download.py
